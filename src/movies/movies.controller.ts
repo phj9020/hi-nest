@@ -10,7 +10,7 @@ export class MoviesController {
         return this.moviesService.getAll();
     }
     // get single movie with id
-    @Get("/:id") 
+    @Get(":id") 
     getOne(@Param("id") movieId:string) : Movie {
         return this.moviesService.getOne(movieId);
     }
@@ -20,17 +20,14 @@ export class MoviesController {
         return this.moviesService.create(movieData);
     }
 
-    @Delete("/:id")
+    @Delete(":id")
     remove(@Param("id") movieId: string){
         return this.moviesService.remove(movieId);
     }
     // Patch: partial update | Put : whole resource update
-    @Patch("/:id")
+    @Patch(":id")
     update(@Param("id") movieId: string, @Body() updateData){
-        return {
-            updatedMovieId : movieId,
-            ...updateData,
-        }
+        return this.moviesService.update(movieId, updateData)
     }
     
 }
